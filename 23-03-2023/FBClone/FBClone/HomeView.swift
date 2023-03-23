@@ -15,19 +15,18 @@ struct HomeView: View {
             HStack{
                 Text("Facebook")
                     .foregroundColor(.blue)
-                    .font(.system(size: 48, weight: .semibold, design: .default))
+                    .font(.system(size: 40, weight: .semibold, design: .default))
                 Spacer()
                 Image(systemName: "person.circle")
                     .resizable()
-                    .frame(width: 50, height: 50, alignment: .center)
+                    .frame(width: 30, height: 30, alignment: .center)
             }.padding()
             TextField("Search...", text: $searchText)
                 .padding()
-                .frame(height: 50)
+                .frame(height: 38)
                 .background(Color(.systemGray5))
                 .padding(.horizontal, 10)
                 .cornerRadius(18)
-            
             
             ZStack{
                 Color(.secondarySystemBackground)
@@ -45,20 +44,19 @@ struct HomeView: View {
                     }
                     FBPost()
                 }
-
+                
             }
-            
-            
-            
-            
             Spacer()
         }
     }
 }
 
 struct FBPost: View{
+    // @State var isLiked: Bool = false
     var body: some View{
+        var isLiked: Bool = false
         ForEach(PostModel.posts, id: \.id){ post in
+            
             ZStack{
                 Color(.tertiarySystemBackground)
                 HStack{
@@ -68,12 +66,24 @@ struct FBPost: View{
                     VStack(alignment: .leading, spacing: 5){
                         Text(post.name)
                         Text(post.desc)
+                        HStack{
+                            Button(action: {
+                                print("hello")
+                            }, label: {
+                                Text(isLiked ? "Unlike" : "Like").font(.system(size: 12, weight: .light, design: .default))
+                            })
+                            Button(action: {}, label: {
+                                Text("Comment").font(.system(size: 12, weight: .light, design: .default))
+                            })
+                            Spacer()
+                            Button(action: {}, label: {
+                                Text("Share").font(.system(size: 12, weight: .light, design: .default))
+                            })
+                        }
                     }
                     Spacer()
                 }.padding()
             }
-            
-            
             
         }
     }
